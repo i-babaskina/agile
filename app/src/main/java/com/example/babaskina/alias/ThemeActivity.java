@@ -1,27 +1,32 @@
 package com.example.babaskina.alias;
 
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+/**
+ * Created by artem on 29.10.15.
+ */
+public class ThemeActivity extends AppCompatActivity {
 
-    private ArrayList<Word> mWords;
+    private ArrayList<Theme> mTheme;
 
-    public class WordAdapter extends ArrayAdapter<Word> {
+    public class ThemeAdapter extends ArrayAdapter<Theme> {
         Context mContext;
 
-        public WordAdapter(ArrayList<Word> words) {
-            super(getApplicationContext(), 0, words);
+        public ThemeAdapter(ArrayList<Theme> themes) {
+            super(getApplicationContext(), 0, themes);
             this.mContext = getApplicationContext();
         }
 
@@ -31,10 +36,10 @@ public class MainActivity extends AppCompatActivity {
                 convertView = getLayoutInflater().inflate(R.layout.list_item_words, null);
             }
 
-            Word word = getItem(position);
+            Theme theme = getItem(position);
 
             TextView titleTextView = (TextView) convertView.findViewById(R.id.word_list_item_titleTextView);
-            titleTextView.setText(word.getTitleWord());
+            titleTextView.setText(theme.getTitleTheme());
 
             return convertView;
         }
@@ -43,12 +48,21 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_theme);
 
-        final ListView lvMain = (ListView) findViewById(R.id.listViewWordsMainActivity);
-        mWords = WordLab.get(this).getWords();
-        WordAdapter adapter = new WordAdapter(mWords);
+        final ListView lvMain = (ListView) findViewById(R.id.listViewThemeActivity);
+        mTheme = ThemeLab.get(this).getTheme();
+        ThemeAdapter adapter = new ThemeAdapter(mTheme);
         lvMain.setAdapter(adapter);
+
+        lvMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(ThemeActivity.this, MainActivity.class);
+                Theme theme = (Theme) lvMain.getItemAtPosition(position);
+                startActivity(i);
+            }
+        });
 
     }
 

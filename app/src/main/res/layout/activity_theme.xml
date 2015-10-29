@@ -7,8 +7,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textViewHeaderWordActivity"
-        android:text="Слова"
+        android:id="@+id/textViewHeaderThemeActivity"
+        android:text="Темы"
         android:textSize="24dp"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="10dp"
@@ -19,6 +19,6 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/listViewWordsMainActivity" />
+        android:id="@+id/listViewThemeActivity" />
 
 </LinearLayout>

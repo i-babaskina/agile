@@ -17,7 +17,7 @@ public class ThemeLab {
     private ThemeLab(Context appContext) {
         mAppContext = appContext;
         mTheme = new ArrayList<Theme>();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10; i++) {
             Theme theme = new Theme();
             theme.setTitleTheme("Theme #" + i);
             mTheme.add(theme);
@@ -31,7 +31,7 @@ public class ThemeLab {
         return sThemeLab;
     }
 
-    public ArrayList<Theme> getWords() {
+    public ArrayList<Theme> getTheme() {
         return mTheme;
     }
 
