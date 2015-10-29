@@ -44,7 +44,7 @@ public class WordLab {
         return null;
     }
 
-    public void addTask(Word word) {
+    public void addWord(Word word) {
         mWords.add(word);
     }
 
@@ -52,7 +52,7 @@ public class WordLab {
         mWords.clear();
     }
 
-    public void deleteTask(Word word) {
+    public void deleteWord(Word word) {
         mWords.remove(word);
     }
 }
