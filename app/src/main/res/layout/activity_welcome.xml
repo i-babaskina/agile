@@ -12,10 +12,61 @@
     <Button
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="Темы"
+        android:text="Play"
+        android:id="@+id/play_button_WelcomeActivity"
+        android:background="@color/colorPrimaryDark"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/settings_button_WelcomeActivity"
+        android:layout_alignLeft="@+id/settings_button_WelcomeActivity"
+        android:layout_alignStart="@+id/settings_button_WelcomeActivity"
+        android:layout_marginBottom="10dp"
+        android:textColor="#fff" />
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="Settings"
+        android:id="@+id/settings_button_WelcomeActivity"
+        android:background="@color/colorPrimaryDark"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/dictionaries_button_WelcomeActivity"
+        android:layout_alignLeft="@+id/dictionaries_button_WelcomeActivity"
+        android:layout_alignStart="@+id/dictionaries_button_WelcomeActivity"
+        android:layout_marginBottom="10dp"
+        android:textColor="#fff" />
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="Dictionaries"
         android:id="@+id/dictionaries_button_WelcomeActivity"
-        android:background="@color/colorAccent"
-        android:layout_marginBottom="20dp"
+        android:background="@color/colorPrimaryDark"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/howToPlay_button_WelcomeActivity"
+        android:layout_alignLeft="@+id/howToPlay_button_WelcomeActivity"
+        android:layout_alignStart="@+id/howToPlay_button_WelcomeActivity"
+        android:layout_marginBottom="10dp"
+        android:textColor="#fff" />
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="How to play?"
+        android:id="@+id/howToPlay_button_WelcomeActivity"
+        android:background="@color/colorPrimaryDark"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/getStatitstics_button_WelcomeActivity"
+        android:layout_alignLeft="@+id/getStatitstics_button_WelcomeActivity"
+        android:layout_alignStart="@+id/getStatitstics_button_WelcomeActivity"
+        android:layout_marginBottom="10dp"
+        android:textColor="#fff" />
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="Get statistics"
+        android:id="@+id/getStatitstics_button_WelcomeActivity"
+        android:background="@color/colorPrimaryDark"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:textColor="#fff" />
