@@ -18,11 +18,19 @@
         </activity>
 
         <activity
-            android:name=".ThemeActivity"
+            android:name=".DictionariesActivity"
             android:label="@string/app_name">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".WelcomeActivity" />
+        </activity>
+
+        <activity
+            android:name=".ThemeActivity"
+            android:label="@string/app_name">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DictionariesActivity" />
         </activity>
 
         <activity

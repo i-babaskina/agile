@@ -18,7 +18,7 @@ public class WelcomeActivity extends AppCompatActivity {
         dictionariesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(WelcomeActivity.this, ThemeActivity.class);
+                Intent i = new Intent(WelcomeActivity.this, DictionariesActivity.class);
                 startActivity(i);
 
             }
