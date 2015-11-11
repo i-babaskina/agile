@@ -22,7 +22,7 @@ public class AliasDatabaseHelper extends SQLiteOpenHelper{
 
         db.execSQL("create table themes (idThemes integer primary key autoincrement, title text, idDictionary integer);");
 
-        db.execSQL("create table words (idWords integer primary key autoincrement, title text, idTheme integer);");
+        db.execSQL("create table words (idWords integer primary key autoincrement, title text, idTheme integer, idDictionary integer);");
     }
 
     @Override
