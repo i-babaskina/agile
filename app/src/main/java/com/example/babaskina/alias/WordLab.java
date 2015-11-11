@@ -17,11 +17,7 @@ public class WordLab {
     private WordLab(Context appContext) {
         mAppContext = appContext;
         mWords = new ArrayList<Word>();
-        for (int i = 0; i < 100; i++) {
-            Word w = new Word();
-            w.setTitleWord("Word #" + i);
-            mWords.add(w);
-        }
+
     }
 
     public static WordLab get(Context c) {

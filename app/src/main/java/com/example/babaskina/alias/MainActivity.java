@@ -61,10 +61,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         idDictionary = getIntent().getIntExtra(COLUMN_WORD_IDDICT, 1);
+        idTheme = getIntent().getIntExtra(COLUMN_WORD_IDTHEME, 1);
 
-        ThemeLab.get(this).clear();
+        WordLab.get(this).clear();
 
-        queryThemeDBHelper();
+        queryWordDBHelper();
 
         final ListView lvMain = (ListView) findViewById(R.id.listViewWordsMainActivity);
         mWords = WordLab.get(this).getWords();
@@ -76,23 +77,23 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        ThemeLab.get(this).clear();
-        queryThemeDBHelper();
-        ListView listView = (ListView) this.findViewById(R.id.listViewThemeActivity);
-        ThemeAdapter adapter = new ThemeAdapter(mTheme);
+        WordLab.get(this).clear();
+        queryWordDBHelper();
+        ListView listView = (ListView) this.findViewById(R.id.listViewWordsMainActivity);
+        WordAdapter adapter = new WordAdapter(mWords);
         listView.setAdapter(adapter);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        ThemeLab.get(this).clear();
+        WordLab.get(this).clear();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        ThemeLab.get(this).clear();
+        WordLab.get(this).clear();
     }
 
 
@@ -124,9 +125,42 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         wordTitle = data.getStringExtra("title");
-        Theme theme = new Theme(wordTitle);
-        addThemeToDatabase(theme);
+        Word word = new Word(wordTitle);
+        addThemeToDatabase(word);
     }
 
-    
+    private void queryWordDBHelper() {
+        aliasDBHelper = new AliasDatabaseHelper(getApplicationContext());
+        SQLiteDatabase db = aliasDBHelper.getWritableDatabase();
+
+        String sqlQuery = "select * from words where idDictionary = \"" + idDictionary + "\"";
+
+        Cursor c = db.rawQuery(sqlQuery, null);
+        if (c != null) {
+            if (c.moveToFirst()) {
+                do {
+                    int themeColIndex = c.getColumnIndex(COLUMN_WORD_IDTHEME);
+                    int themeID = Integer.parseInt(c.getString(themeColIndex));
+                    if (themeID == idTheme) {
+                        int titleColIndex = c.getColumnIndex(COLUMN_WORD_TITLE);
+                        Word resWord = new Word();
+                        resWord.setTitleWord(c.getString(titleColIndex));
+                        WordLab.get(getApplicationContext()).addWord(resWord);
+                    }
+                } while (c.moveToNext());
+            }
+        }
+
+        c.close();
+
+    }
+
+    private void addThemeToDatabase(Word word) {
+        ContentValues cv = new ContentValues();
+        SQLiteDatabase db = aliasDBHelper.getWritableDatabase();
+        cv.put(COLUMN_WORD_TITLE, word.getTitleWord());
+        cv.put(COLUMN_WORD_IDDICT, idDictionary);
+        cv.put(COLUMN_WORD_IDTHEME, idTheme);
+        db.insert(TABLE_WORD, null, cv);
+    }
 }

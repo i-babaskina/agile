@@ -25,6 +25,7 @@ public class ThemeActivity extends AppCompatActivity {
 
     private static final String TABLE_THEMES = "themes";
     private static final String COLUMN_THEME_TITLE = "title";
+    private static final String COLUMN_WORD_IDTHEME = "idTheme";
     private static final String COLUMN_THEME_IDDICT = "idDictionary";
 
     private int idDictionary;
@@ -62,7 +63,9 @@ public class ThemeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_theme);
-        idDictionary = getIntent().getIntExtra(COLUMN_THEME_IDDICT, 1);
+        if (getIntent().hasExtra(COLUMN_THEME_IDDICT)) {
+            idDictionary = getIntent().getIntExtra(COLUMN_THEME_IDDICT, 1);
+        }
 
         ThemeLab.get(this).clear();
 
@@ -77,6 +80,8 @@ public class ThemeActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(ThemeActivity.this, MainActivity.class);
+                i.putExtra(COLUMN_THEME_IDDICT, idDictionary);
+                i.putExtra(COLUMN_WORD_IDTHEME, position);
                 startActivity(i);
             }
         });
