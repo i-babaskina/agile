@@ -24,7 +24,8 @@ import java.util.ArrayList;
 public class DictionariesActivity extends AppCompatActivity {
 
     private static final String TABLE_DICTIONARY = "dictionaries";
-    private static final String COLUMN_TASK_TITLE = "title";
+    private static final String COLUMN_DICTIONARY_TITLE = "title";
+    private static final String idDictionary = "idDictionary";
 
     private String dictTitle;
 
@@ -72,7 +73,7 @@ public class DictionariesActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(DictionariesActivity.this, ThemeActivity.class);
-                Dictionary dictionary = (Dictionary) lvMain.getItemAtPosition(position);
+                i.putExtra(idDictionary, position);
                 startActivity(i);
             }
         });
@@ -143,7 +144,7 @@ public class DictionariesActivity extends AppCompatActivity {
 
         if (c.moveToFirst()) {
 
-            int titleColIndex = c.getColumnIndex(COLUMN_TASK_TITLE);
+            int titleColIndex = c.getColumnIndex(COLUMN_DICTIONARY_TITLE);
 
 
             do {
@@ -158,7 +159,7 @@ public class DictionariesActivity extends AppCompatActivity {
     private void addDictToDatabase(Dictionary dictionary) {
         ContentValues cv = new ContentValues();
         SQLiteDatabase db = aliasDBHelper.getWritableDatabase();
-        cv.put(COLUMN_TASK_TITLE, dictionary.getTitleDictionary());
+        cv.put(COLUMN_DICTIONARY_TITLE, dictionary.getTitleDictionary());
         db.insert(TABLE_DICTIONARY, null, cv);
     }
 }
