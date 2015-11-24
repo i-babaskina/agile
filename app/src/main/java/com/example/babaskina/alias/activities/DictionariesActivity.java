@@ -1,4 +1,4 @@
-package com.example.babaskina.alias;
+package com.example.babaskina.alias.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +12,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.babaskina.alias.R;
 
 import java.util.ArrayList;
 

@@ -4,52 +4,61 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:icon="@mipmap/agile"
+        android:label="Alias"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-<<<<<<< HEAD
-
-=======
->>>>>>> 8d9e2969738cab8a04fa13b387f4c803f3de693e
-        <activity android:name=".WelcomeActivity" >
+        <activity
+            android:name=".activities.WelcomeActivity"
+            android:label="Alias"
+            android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
-
         <activity
-            android:name=".DictionariesActivity"
-            android:label="@string/app_name">
+            android:name=".activities.DictionariesActivity"
+            android:label="@string/app_name" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".WelcomeActivity" />
-=======
-        <activity android:name=".MainActivity" >
+                android:value=".activities.WelcomeActivity" />
         </activity>
-        <activity android:name=".MenuActivity" >
->>>>>>> 8d9e2969738cab8a04fa13b387f4c803f3de693e
-        </activity>
-
         <activity
-            android:name=".ThemeActivity"
-            android:label="@string/app_name">
+            android:name=".activities.ThemeActivity"
+            android:label="@string/app_name" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".DictionariesActivity" />
+                android:value=".activities.DictionariesActivity" />
         </activity>
-
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name">
+            android:name=".activities.MainActivity"
+            android:label="@string/app_name" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ThemeActivity" />
+                android:value=".activities.ThemeActivity" />
         </activity>
-
+        <activity android:name=".activities.MenuActivity" >
+        </activity>
+        <activity android:name=".activities.Settings_activity" >
+        </activity>
+        <activity android:name=".activities.StatsActivity" >
+        </activity>
+        <activity android:name=".activities.TutorialActivity" >
+        </activity>
+        <activity android:name=".activities.ChooseGame" >
+        </activity>
+        <activity android:name=".activities.GameActivity" >
+        </activity>
+        <activity android:name=".activities.TurnStat" >
+        </activity>
+        <activity android:name=".activities.GameProc" >
+        </activity>
+        <activity android:name=".activities.WordStatistic" >
+        </activity>
+        <activity android:name=".activities.Edit_Teams" >
+        </activity>
     </application>
 
 </manifest>

@@ -1,4 +1,22 @@
 <resources>
-    <string name="app_name"></string>
+    <string name="app_name">"Alias"</string>
     <string name="action_settings">Settings</string>
+    <string name="new_task">add</string>
+    <string name="title_activity_continue_game">ContinueGame</string>
+
+    <string-array name="teamNames">
+        <item>Choose a dictionary:</item>
+        <item>Science</item>
+        <item>Arts</item>
+        <item>The Game of Thrones</item>
+    </string-array>
+
+    <string-array name="teamset">
+        <item>Dich</item>
+        <item>Valera</item>
+        <item>Kek</item>
+        <item>Lel</item>
+        <item>Fuf</item>
+    </string-array>
+
 </resources>

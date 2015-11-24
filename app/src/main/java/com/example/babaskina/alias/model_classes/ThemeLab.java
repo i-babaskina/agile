@@ -1,4 +1,4 @@
-package com.example.babaskina.alias;
+package com.example.babaskina.alias.model_classes;
 
 import android.content.Context;
 
