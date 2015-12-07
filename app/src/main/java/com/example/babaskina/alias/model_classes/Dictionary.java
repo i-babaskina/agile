@@ -11,7 +11,7 @@ public class Dictionary {
 
     public Dictionary(){
         id = UUID.randomUUID();
-        titleDictionary = "Theme";
+        titleDictionary = "Dictionary";
     }
 
     public Dictionary(String title){
