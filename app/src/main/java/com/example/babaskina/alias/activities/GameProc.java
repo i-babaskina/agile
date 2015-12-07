@@ -44,16 +44,22 @@ public class GameProc extends AppCompatActivity {
         gameWord.setText(Exchange.game.getCurrentTurn().suggestNewWord().getInLowercase());
     }
 
+    public void progress(){
+        while(true){
+            progress = 0;
+            progress++;
+            Progress.setText(""+progress);
+        }
+    }
+
     private Runnable myThread = new Runnable() {
         @Override
         public void run() {
             // TODO Auto-generated method stub
-            while (myProgress < 100 || progress > 0) {
+            while (myProgress < 100) {
                 try {
                     myHandle.sendMessage(myHandle.obtainMessage());
                     Thread.sleep(Exchange.game.getTurnLengthSeconds() * 10);
-                    progress--;
-                    Progress.setText(""+progress);
                 } catch (Throwable t) {
                 }
             }
