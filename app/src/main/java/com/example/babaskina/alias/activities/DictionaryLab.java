@@ -17,11 +17,6 @@ public class DictionaryLab {
     private DictionaryLab(Context appContext) {
         mAppContext = appContext;
         mDictionaries = new ArrayList<Dictionary>();
-        for (int i = 0; i < 10; i++) {
-            Dictionary dictionary = new Dictionary();
-            dictionary.setTitleDictionary("Dictionary #" + i);
-            mDictionaries.add(dictionary);
-        }
     }
 
     public static DictionaryLab get(Context c) {
