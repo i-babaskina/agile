@@ -1,4 +1,4 @@
-package com.example.babaskina.alias;
+package com.example.babaskina.alias.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+
+import com.example.babaskina.alias.R;
 
 /**
  * Created by artem on 11.11.15.

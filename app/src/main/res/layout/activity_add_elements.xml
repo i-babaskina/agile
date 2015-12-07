@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundBodyLight"
+    android:background="@color/colorPrimary"
     android:weightSum="1">
 
     <EditText
@@ -39,7 +39,6 @@
         android:layout_height="wrap_content"
         android:text="Добавить"
         android:id="@+id/add_btn_elem_AddElemActivity"
-        android:background="@color/backgroundMain"
         android:layout_marginBottom="20dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"

@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.babaskina.alias.R;
+import com.example.babaskina.alias.database.AliasDatabaseHelper;
 
 import java.util.ArrayList;
 
@@ -73,8 +74,9 @@ public class MainActivity extends AppCompatActivity {
         mWords = WordLab.get(this).getWords();
         WordAdapter adapter = new WordAdapter(mWords);
         lvMain.setAdapter(adapter);
-
     }
+
+
 
     @Override
     public void onResume() {
@@ -148,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
                         Word resWord = new Word();
                         resWord.setTitleWord(c.getString(titleColIndex));
                         WordLab.get(getApplicationContext()).addWord(resWord);
+                        WordLab.get(getApplicationContext()).deleteWord(resWord);
                     }
                 } while (c.moveToNext());
             }
@@ -164,5 +167,10 @@ public class MainActivity extends AppCompatActivity {
         cv.put(COLUMN_WORD_IDDICT, idDictionary);
         cv.put(COLUMN_WORD_IDTHEME, idTheme);
         db.insert(TABLE_WORD, null, cv);
+    }
+
+    private void deleteThemefromDatabase(Word word) {
+        SQLiteDatabase db = aliasDBHelper.getWritableDatabase();
+        db.delete(TABLE_WORD, null, null);
     }
 }

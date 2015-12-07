@@ -17,6 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.babaskina.alias.R;
+import com.example.babaskina.alias.database.AliasDatabaseHelper;
 
 import java.util.ArrayList;
 

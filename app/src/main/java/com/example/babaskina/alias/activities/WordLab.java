@@ -47,7 +47,6 @@ public class WordLab {
     public void addWord(Word word) {
         mWords.add(word);
     }
-
     public void clear() {
         mWords.clear();
     }

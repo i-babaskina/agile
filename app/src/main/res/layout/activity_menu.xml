@@ -23,10 +23,12 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="47dp"
-        android:layout_marginStart="47dp" />
+        android:layout_marginStart="47dp"
+        android:layout_row="0"
+        android:layout_column="0" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Play"
@@ -37,15 +39,14 @@
         android:textStyle="bold|italic"
         android:typeface="serif"
         android:layout_alignWithParentIfMissing="false"
-        android:layout_above="@+id/textView4"
-        android:layout_alignLeft="@+id/textView4"
-        android:layout_alignStart="@+id/textView4"
-        android:layout_marginLeft="44dp"
-        android:layout_marginStart="44dp"
-        android:clickable="true" />
+        android:clickable="true"
+        android:layout_row="3"
+        android:layout_column="0"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Settings"
@@ -55,60 +56,46 @@
         android:textSize="40dp"
         android:textStyle="bold|italic"
         android:typeface="serif"
-        android:layout_centerVertical="true"
-        android:layout_alignLeft="@+id/AliasText"
-        android:layout_alignStart="@+id/AliasText"
-        android:layout_marginLeft="39dp"
-        android:layout_marginStart="39dp"
-        android:clickable="true" />
+        android:clickable="true"
+        android:layout_row="4"
+        android:layout_column="0"
+        android:layout_below="@+id/textView3"
+        android:layout_centerHorizontal="true" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Dictionaries"
-        android:layout_centerInParent="true"
-        android:id="@+id/textView5"
-        android:textColor="#FFFFFF"
-        android:textIsSelectable="true"
-        android:textSize="40dp"
-        android:textStyle="bold|italic"
-        android:typeface="serif"
-        android:layout_below="@+id/textView4"
-        android:layout_alignLeft="@+id/AliasText"
-        android:layout_alignStart="@+id/AliasText"
-        android:clickable="true"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="How to play?"
+        android:text="Tutorial"
         android:id="@+id/textView6"
         android:textColor="#FFFFFF"
         android:textIsSelectable="true"
         android:textSize="40dp"
         android:textStyle="bold|italic"
         android:typeface="serif"
+        android:clickable="true"
+        android:layout_row="5"
+        android:layout_column="0"
         android:layout_below="@+id/textView5"
-        android:layout_alignLeft="@+id/textView5"
-        android:layout_alignStart="@+id/textView5"
-        android:clickable="true" />
+        android:layout_alignRight="@+id/textView4"
+        android:layout_alignEnd="@+id/textView4" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Get statistics"
-        android:id="@+id/textView7"
+        android:text="Dictionaries"
+        android:id="@+id/textView5"
         android:textColor="#FFFFFF"
         android:textIsSelectable="true"
         android:textSize="40dp"
         android:textStyle="bold|italic"
         android:typeface="serif"
-        android:layout_below="@+id/textView6"
-        android:layout_alignLeft="@+id/textView6"
-        android:layout_alignStart="@+id/textView6"
-        android:clickable="true" />
+        android:clickable="true"
+        android:layout_row="6"
+        android:layout_column="0"
+        android:layout_below="@+id/textView4"
+        android:layout_alignLeft="@+id/AliasText"
+        android:layout_alignStart="@+id/AliasText" />
 
 </RelativeLayout>

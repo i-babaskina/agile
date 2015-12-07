@@ -7,9 +7,9 @@
         android:icon="@mipmap/add_button"
         android:title="@string/new_task"
         android:showAsAction="ifRoom|withText"/>
+    <item android:id="@+id/action_delete_task"
+        android:icon="@mipmap/add_button"
+        android:title="delete"
+        android:showAsAction="ifRoom|withText"/>
 
-    <item android:id="@+id/action_settings"
-        android:title="@string/action_settings"
-        android:orderInCategory="100"
-        app:showAsAction="never" />
 </menu>

@@ -55,16 +55,5 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
-        TextView btn4 = (TextView) findViewById(R.id.textView7);
-        btn4.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MenuActivity.this, StatsActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
-
-
-}
+    }}
