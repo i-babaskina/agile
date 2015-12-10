@@ -7,6 +7,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -86,16 +89,55 @@ public class ThemeActivity extends AppCompatActivity {
             }
         });
 
+        /*lvMain.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Theme theme = mTheme.remove(position);
+                String title = theme.getTitleTheme();
+                deleteThemeDB(title);
+                Toast.makeText(getApplicationContext(),
+                        title + " удалён.",
+                        Toast.LENGTH_SHORT).show();
+                update();
+                return true;
+            }
+        });*/
+
+        lvMain.setOnCreateContextMenuListener(this);
+
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        AdapterView.AdapterContextMenuInfo aMenuInfo = (AdapterView.AdapterContextMenuInfo) menuInfo;
+
+        // Получаем позицию элемента в списке
+        int position = aMenuInfo.position;
+
+        // Получаем данные элемента списка, тип данных здесь вы должны указать свой!
+
+        Theme theme = mTheme.remove(position);
+        final String title = theme.getTitleTheme();
+
+        menu.setHeaderTitle("Заголовок");
+        menu.add("Первый элемент").setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                // дествия по клику меню
+                deleteThemeDB(title);
+                Toast.makeText(getApplicationContext(),
+                        title + " удалён.",
+                        Toast.LENGTH_SHORT).show();
+                update();
+                return true;
+            }
+        });
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        ThemeLab.get(this).clear();
-        queryThemeDBHelper();
-        ListView listView = (ListView) this.findViewById(R.id.listViewThemeActivity);
-        ThemeAdapter adapter = new ThemeAdapter(mTheme);
-        listView.setAdapter(adapter);
+        update();
     }
 
     @Override
@@ -142,6 +184,14 @@ public class ThemeActivity extends AppCompatActivity {
         addThemeToDatabase(theme);
     }
 
+    private void update(){
+        ThemeLab.get(this).clear();
+        queryThemeDBHelper();
+        ListView listView = (ListView) this.findViewById(R.id.listViewThemeActivity);
+        ThemeAdapter adapter = new ThemeAdapter(mTheme);
+        listView.setAdapter(adapter);
+    }
+
     private void queryThemeDBHelper() {
         aliasDBHelper = new AliasDatabaseHelper(getApplicationContext());
         SQLiteDatabase db = aliasDBHelper.getWritableDatabase();
@@ -170,5 +220,12 @@ public class ThemeActivity extends AppCompatActivity {
         cv.put(COLUMN_THEME_TITLE, theme.getTitleTheme());
         cv.put(COLUMN_THEME_IDDICT, idDictionary);
         db.insert(TABLE_THEMES, null, cv);
+    }
+
+    private void deleteThemeDB(String theme) {
+        aliasDBHelper = new AliasDatabaseHelper(getApplicationContext());
+        SQLiteDatabase db = aliasDBHelper.getWritableDatabase();
+        db.delete("themes", "title = \"" + theme + "\"", null);
+        aliasDBHelper.close();
     }
 }

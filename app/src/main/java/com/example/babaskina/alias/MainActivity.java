@@ -7,13 +7,16 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -71,17 +74,26 @@ public class MainActivity extends AppCompatActivity {
         mWords = WordLab.get(this).getWords();
         WordAdapter adapter = new WordAdapter(mWords);
         lvMain.setAdapter(adapter);
+        lvMain.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Word word = mWords.remove(position);
+                String title = word.getTitleWord();
+                deleteWordDB(title);
+                Toast.makeText(getApplicationContext(),
+                        title + " удалён.",
+                        Toast.LENGTH_SHORT).show();
+                update();
+                return true;
+            }
+        });
 
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        WordLab.get(this).clear();
-        queryWordDBHelper();
-        ListView listView = (ListView) this.findViewById(R.id.listViewWordsMainActivity);
-        WordAdapter adapter = new WordAdapter(mWords);
-        listView.setAdapter(adapter);
+        update();
     }
 
     @Override
@@ -114,6 +126,9 @@ public class MainActivity extends AppCompatActivity {
                 Intent i = new Intent(getApplicationContext(), AddElementsActivity.class);
                 startActivityForResult(i, 0);
                 return true;
+            case R.id.action_settings:
+                update2();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -127,6 +142,22 @@ public class MainActivity extends AppCompatActivity {
         wordTitle = data.getStringExtra("title");
         Word word = new Word(wordTitle);
         addThemeToDatabase(word);
+    }
+
+    private void update() {
+        WordLab.get(this).clear();
+        queryWordDBHelper();
+        ListView listView = (ListView) this.findViewById(R.id.listViewWordsMainActivity);
+        WordAdapter adapter = new WordAdapter(mWords);
+        listView.setAdapter(adapter);
+    }
+
+    private void update2() {
+        WordLab.get(this).clear();
+        queryAllWordsDBHelper();
+        ListView listView = (ListView) this.findViewById(R.id.listViewWordsMainActivity);
+        WordAdapter adapter = new WordAdapter(mWords);
+        listView.setAdapter(adapter);
     }
 
     private void queryWordDBHelper() {
@@ -162,5 +193,35 @@ public class MainActivity extends AppCompatActivity {
         cv.put(COLUMN_WORD_IDDICT, idDictionary);
         cv.put(COLUMN_WORD_IDTHEME, idTheme);
         db.insert(TABLE_WORD, null, cv);
+    }
+
+    private void deleteWordDB(String word) {
+        aliasDBHelper = new AliasDatabaseHelper(getApplicationContext());
+        SQLiteDatabase db = aliasDBHelper.getWritableDatabase();
+        db.delete("words", "title = \"" + word + "\"", null);
+        aliasDBHelper.close();
+    }
+
+    private void queryAllWordsDBHelper() {
+        aliasDBHelper = new AliasDatabaseHelper(getApplicationContext());
+        SQLiteDatabase db = aliasDBHelper.getWritableDatabase();
+
+        String sqlQuery = "select * from words where idDictionary = \"" + idDictionary + "\"";
+
+        Cursor c = db.rawQuery(sqlQuery, null);
+        if (c != null) {
+            if (c.moveToFirst()) {
+                do {
+                    int titleColIndex = c.getColumnIndex(COLUMN_WORD_TITLE);
+                    Word resWord = new Word();
+                    resWord.setTitleWord(c.getString(titleColIndex));
+                    WordLab.get(getApplicationContext()).addWord(resWord);
+                } while (c.moveToNext());
+            }
+        }
+
+        c.close();
+
+
     }
 }
