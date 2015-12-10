@@ -2,6 +2,8 @@ package com.example.babaskina.alias.activities;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
@@ -12,12 +14,17 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.babaskina.alias.R;
+import com.example.babaskina.alias.database.AliasDatabaseHelper;
+import com.example.babaskina.alias.model_classes.*;
+import com.example.babaskina.alias.model_classes.WordLab;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 
 public class GameProc extends AppCompatActivity {
+    private int idDictionary;
+    private static final String COLUMN_WORD_TITLE = "title";
     public ArrayList<String> teams = new ArrayList<String>();
     ProgressBar myProgressBar;
     TextView Progress;
@@ -50,6 +57,28 @@ public class GameProc extends AppCompatActivity {
             progress++;
             Progress.setText(""+progress);
         }
+    }
+
+    private void queryAllWordsDBHelper() {
+        AliasDatabaseHelper aliasDBHelper = new AliasDatabaseHelper(this);
+        SQLiteDatabase db = aliasDBHelper.getWritableDatabase();
+
+        String sqlQuery = "select * from words where idDictionary = \"" + idDictionary + "\"";
+
+        Cursor c = db.rawQuery(sqlQuery, null);
+        if (c != null) {
+            if (c.moveToFirst()) {
+                do {
+                    int titleColIndex = c.getColumnIndex(COLUMN_WORD_TITLE);
+                    com.example.babaskina.alias.model_classes.Word resWord = new com.example.babaskina.alias.model_classes.Word();
+                    resWord.setTitleWord(c.getString(titleColIndex));
+                    WordLab.get(this).addWord(resWord);
+                } while (c.moveToNext());
+            }
+        }
+
+        c.close();
+
     }
 
     private Runnable myThread = new Runnable() {

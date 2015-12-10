@@ -136,7 +136,27 @@ public class Turn{
         c.close();
 
     }
-    // TODO
+    /*private void queryAllWordsDBHelper() {
+        AliasDatabaseHelper aliasDBHelper = new AliasDatabaseHelper(this);
+        SQLiteDatabase db = aliasDBHelper.getWritableDatabase();
+
+        String sqlQuery = "select * from words where idDictionary = \"" + idDictionary + "\"";
+
+        Cursor c = db.rawQuery(sqlQuery, null);
+        if (c != null) {
+            if (c.moveToFirst()) {
+                do {
+                    int titleColIndex = c.getColumnIndex(COLUMN_WORD_TITLE);
+                    Word resWord = new Word();
+                    resWord.setTitleWord(c.getString(titleColIndex));
+                    WordLab.get(this).addWord(resWord);
+                } while (c.moveToNext());
+            }
+        }
+
+        c.close();
+
+    }*/
     public GameWord suggestNewWord(){
 
 //        List<Word1> allWords = getAllSugarWords();
@@ -154,6 +174,7 @@ public class Turn{
         i = (i + 1) % words.size();
         _gameWords.add(result);
         return result;
+
     }
 
     //void showWord(GameWord inputWord);
