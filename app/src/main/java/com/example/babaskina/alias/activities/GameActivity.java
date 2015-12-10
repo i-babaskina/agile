@@ -1,6 +1,7 @@
 package com.example.babaskina.alias.activities;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.babaskina.alias.R;
+import com.example.babaskina.alias.database.AliasDatabaseHelper;
 import com.example.babaskina.alias.model_classes.Game;
 import com.example.babaskina.alias.model_classes.Parameters;
 import com.example.babaskina.alias.model_classes.Topic;
@@ -28,6 +30,7 @@ public class GameActivity extends AppCompatActivity {
     protected static int turnLengthSeconds;
     protected int numberWordsToWin;
     protected Topic topic;
+    private AliasDatabaseHelper aliasDBHelper;
     public TextView t;
     public TextView t1;
     ArrayList<String> teams = new ArrayList<String>();
@@ -44,8 +47,7 @@ public class GameActivity extends AppCompatActivity {
         t1 = (TextView) findViewById(R.id.wordsToWinValueText);
 
         teams.add("Valera");teams.add("Dich");teams.add("Demo");
-        topics.put("Singularity", "Singularity");topics.put("Memes", "Memes");topics.put("Jokes", "Jokes");
-
+        //SQLiteDatabase db = aliasDBHelper.getWritableDatabase();
         Spinner spinner = (Spinner) findViewById(R.id.chooseDictionarySpinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.teamNames, android.R.layout.simple_spinner_item);

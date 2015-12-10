@@ -9,7 +9,7 @@ import java.util.UUID;
  * Created by artem on 26.10.15.
  */
 public class WordLab {
-    private ArrayList<Word> mWords;
+    private static ArrayList<Word> mWords;
 //for commit
     private static WordLab sWordLab;
     private Context mAppContext;
@@ -27,11 +27,11 @@ public class WordLab {
         return sWordLab;
     }
 
-    public ArrayList<Word> getWords() {
+    public static ArrayList<Word> getWords() {
         return mWords;
     }
 
-    public Word getWord(UUID id) {
+    public static Word getWord(UUID id) {
         for (Word w : mWords) {
             if (w.getId().equals(id)) {
                 return w;

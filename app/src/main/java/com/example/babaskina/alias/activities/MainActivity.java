@@ -7,13 +7,17 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.babaskina.alias.R;
 import com.example.babaskina.alias.database.AliasDatabaseHelper;
@@ -67,25 +71,47 @@ public class MainActivity extends AppCompatActivity {
         idTheme = getIntent().getIntExtra(COLUMN_WORD_IDTHEME, 1);
 
         WordLab.get(this).clear();
-
         queryWordDBHelper();
 
         final ListView lvMain = (ListView) findViewById(R.id.listViewWordsMainActivity);
         mWords = WordLab.get(this).getWords();
         WordAdapter adapter = new WordAdapter(mWords);
         lvMain.setAdapter(adapter);
+        registerForContextMenu(lvMain);
+        lvMain.setOnCreateContextMenuListener(this);
     }
 
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        AdapterView.AdapterContextMenuInfo aMenuInfo = (AdapterView.AdapterContextMenuInfo) menuInfo;
 
+// Получаем позицию элемента в списке
+        int position = aMenuInfo.position;
+
+// Получаем данные элемента списка, тип данных здесь вы должны указать свой!
+
+        Word word = mWords.remove(position);
+        final String title = word.getTitleWord();
+
+        menu.setHeaderTitle("Are you sure you want to delete this element?");
+        menu.add("Yes").setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+// дествия по клику меню
+                deleteWordDB(title);
+                Toast.makeText(getApplicationContext(),
+                        title + " удалён.",
+                        Toast.LENGTH_SHORT).show();
+                update();
+                return true;
+            }
+        });
+    }
 
     @Override
     public void onResume() {
         super.onResume();
-        WordLab.get(this).clear();
-        queryWordDBHelper();
-        ListView listView = (ListView) this.findViewById(R.id.listViewWordsMainActivity);
-        WordAdapter adapter = new WordAdapter(mWords);
-        listView.setAdapter(adapter);
+        update();
     }
 
     @Override
@@ -133,6 +159,14 @@ public class MainActivity extends AppCompatActivity {
         addThemeToDatabase(word);
     }
 
+    private void update(){
+        WordLab.get(this).clear();
+        queryWordDBHelper();
+        ListView listView = (ListView) this.findViewById(R.id.listViewWordsMainActivity);
+        WordAdapter adapter = new WordAdapter(mWords);
+        listView.setAdapter(adapter);
+    }
+
     private void queryWordDBHelper() {
         aliasDBHelper = new AliasDatabaseHelper(getApplicationContext());
         SQLiteDatabase db = aliasDBHelper.getWritableDatabase();
@@ -150,7 +184,6 @@ public class MainActivity extends AppCompatActivity {
                         Word resWord = new Word();
                         resWord.setTitleWord(c.getString(titleColIndex));
                         WordLab.get(getApplicationContext()).addWord(resWord);
-                        WordLab.get(getApplicationContext()).deleteWord(resWord);
                     }
                 } while (c.moveToNext());
             }
@@ -169,8 +202,10 @@ public class MainActivity extends AppCompatActivity {
         db.insert(TABLE_WORD, null, cv);
     }
 
-    private void deleteThemefromDatabase(Word word) {
+    private void deleteWordDB(String word) {
+        aliasDBHelper = new AliasDatabaseHelper(getApplicationContext());
         SQLiteDatabase db = aliasDBHelper.getWritableDatabase();
-        db.delete(TABLE_WORD, null, null);
+        db.delete("words", "title = \"" + word + "\"", null);
+        aliasDBHelper.close();
     }
 }

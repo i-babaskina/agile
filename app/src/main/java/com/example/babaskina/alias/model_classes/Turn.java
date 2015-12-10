@@ -1,9 +1,24 @@
 package com.example.babaskina.alias.model_classes;
 
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
+import com.example.babaskina.alias.database.AliasDatabaseHelper;
+
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Turn{
+    private static final String TABLE_WORD = "words";
+    private static final String COLUMN_WORD_TITLE = "title";
+    private static final String COLUMN_WORD_IDTHEME = "idTheme";
+    private static final String COLUMN_WORD_IDDICT = "idDictionary";
+    private int idDictionary;
+    private int idTheme;
+
+    private String wordTitle;
     ArrayList<GameWord> _gameWords;
     Team _team;
     Parameters _parameters;
@@ -11,9 +26,10 @@ public class Turn{
     int _statistics;
     int _guessedCount;
     int _unguessedCount;
+    private Context context;
 
     private static int i = 0;
-
+    public  Turn(Context context){this.context = context;}
     public Turn(Team playingTeam, Parameters parameters){
         _team = _team;
         _parameters = parameters;
@@ -96,7 +112,30 @@ public class Turn{
         _statistics += GameWord.UNGUESSED_STATUS;
         suggestNewWord();
     }
+    private void queryWordDBHelper() {
+        AliasDatabaseHelper aliasDBHelper = new AliasDatabaseHelper();
+        SQLiteDatabase db = aliasDBHelper.getWritableDatabase();
 
+        String sqlQuery = "select * from words where idDictionary = \"" + idDictionary + "\"";
+
+        Cursor c = db.rawQuery(sqlQuery, null);
+        if (c != null) {
+            if (c.moveToFirst()) {
+                do {
+                    int themeColIndex = c.getColumnIndex(COLUMN_WORD_IDTHEME);
+                    int themeID = Integer.parseInt(c.getString(themeColIndex));
+                    if (themeID == idTheme) {
+                        int titleColIndex = c.getColumnIndex(COLUMN_WORD_TITLE);
+                        com.example.babaskina.alias.activities.Word resWord = new com.example.babaskina.alias.activities.Word();
+                        resWord.setTitleWord(c.getString(titleColIndex));
+                    }
+                } while (c.moveToNext());
+            }
+        }
+
+        c.close();
+
+    }
     // TODO
     public GameWord suggestNewWord(){
 
@@ -108,10 +147,11 @@ public class Turn{
 //            }
 //        }
         //GameWord result = new GameWord(w,GameWord.NEUTRAL_STATUS);
-        String words[] = new String[] {"инкапсуляция", "наследование", "полиморфизм", "абстракция", "интерфейс"};
-
-        GameWord result = new GameWord(new Word1(0, null, null, null, words[i], false));
-        i = (i + 1) % words.length;
+        //String words[] = new String[] {"инкапсуляция", "наследование", "полиморфизм", "абстракция", "интерфейс"};
+        //AliasDatabaseHelper dbHelper = new AliasDatabaseHelper(this);
+        List<Word> words = WordLab.getWords();
+        GameWord result = new GameWord(new Word1(0, null, null, null, words.get(i).toString(), false));
+        i = (i + 1) % words.size();
         _gameWords.add(result);
         return result;
     }

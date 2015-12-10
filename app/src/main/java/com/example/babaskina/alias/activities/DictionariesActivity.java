@@ -165,4 +165,10 @@ public class DictionariesActivity extends AppCompatActivity {
         cv.put(COLUMN_DICTIONARY_TITLE, dictionary.getTitleDictionary());
         db.insert(TABLE_DICTIONARY, null, cv);
     }
+    private void deleteDictDB(String dictTitle) {
+        aliasDBHelper = new AliasDatabaseHelper(getApplicationContext());
+        SQLiteDatabase db = aliasDBHelper.getWritableDatabase();
+        db.delete("dictionaries", "title = \"" + dictTitle + "\"", null);
+        aliasDBHelper.close();
+    }
 }
