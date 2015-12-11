@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.babaskina.alias.activities.GameProc;
 import com.example.babaskina.alias.database.AliasDatabaseHelper;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class Turn{
     private static final String COLUMN_WORD_IDDICT = "idDictionary";
     private int idDictionary;
     private int idTheme;
+    private ArrayList<com.example.babaskina.alias.activities.Word> mWords;
 
     private String wordTitle;
     ArrayList<GameWord> _gameWords;
@@ -27,6 +29,7 @@ public class Turn{
     int _guessedCount;
     int _unguessedCount;
     private Context context;
+    public static String words[] = new String[] {"инкапсуляция", "наследование", "полиморфизм", "абстракция", "интерфейс", "Паттерн", "Полиморфизм", "Монетизация"};
 
     private static int i = 0;
     public  Turn(Context context){this.context = context;}
@@ -136,45 +139,12 @@ public class Turn{
         c.close();
 
     }
-    /*private void queryAllWordsDBHelper() {
-        AliasDatabaseHelper aliasDBHelper = new AliasDatabaseHelper(this);
-        SQLiteDatabase db = aliasDBHelper.getWritableDatabase();
 
-        String sqlQuery = "select * from words where idDictionary = \"" + idDictionary + "\"";
-
-        Cursor c = db.rawQuery(sqlQuery, null);
-        if (c != null) {
-            if (c.moveToFirst()) {
-                do {
-                    int titleColIndex = c.getColumnIndex(COLUMN_WORD_TITLE);
-                    Word resWord = new Word();
-                    resWord.setTitleWord(c.getString(titleColIndex));
-                    WordLab.get(this).addWord(resWord);
-                } while (c.moveToNext());
-            }
-        }
-
-        c.close();
-
-    }*/
     public GameWord suggestNewWord(){
-
-//        List<Word1> allWords = getAllSugarWords();
-//        Word1 w = new Word1(0, new Description(0, "description"), null, getSugarTopic(Exchange.CurrentTopicId),"�����",false);
-//        for(int i = 0;i < allWords.size();i++) {
-//            if (allWords.get(i).getTopic().getTopicId() == Exchange.CurrentTopicId) {
-//                w = allWords.get(i);
-//            }
-//        }
-        //GameWord result = new GameWord(w,GameWord.NEUTRAL_STATUS);
-        //String words[] = new String[] {"инкапсуляция", "наследование", "полиморфизм", "абстракция", "интерфейс"};
-        //AliasDatabaseHelper dbHelper = new AliasDatabaseHelper(this);
-        List<Word> words = WordLab.getWords();
-        GameWord result = new GameWord(new Word1(0, null, null, null, words.get(i).toString(), false));
-        i = (i + 1) % words.size();
+        GameWord result = new GameWord(new Word1(0, null, null, null, words[i], false));
+        i = (i + 1) % words.length;
         _gameWords.add(result);
         return result;
-
     }
 
     //void showWord(GameWord inputWord);

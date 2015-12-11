@@ -6,17 +6,17 @@
 
     <string-array name="teamNames">
         <item>Choose a dictionary:</item>
-        <item>Science</item>
+        <item>Программирование</item>
         <item>Arts</item>
-        <item>The Game of Thrones</item>
+        <item>War</item>
     </string-array>
 
     <string-array name="teamset">
-        <item>Dich</item>
-        <item>Valera</item>
-        <item>Kek</item>
-        <item>Lel</item>
-        <item>Fuf</item>
+        <item>Leniffci</item>
+        <item>PI-13-1</item>
+        <item>Appz</item>
+        <item>PI-13-4</item>
+        <item>KN-13-2</item>
     </string-array>
 
 </resources>

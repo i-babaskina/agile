@@ -11,7 +11,7 @@
         <activity
             android:name=".activities.WelcomeActivity"
             android:label="Alias"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -39,25 +39,74 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.ThemeActivity" />
         </activity>
-        <activity android:name=".activities.MenuActivity" >
+        <activity
+            android:name=".activities.MenuActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
         </activity>
-        <activity android:name=".activities.Settings_activity" >
+        <activity
+            android:name=".activities.Settings_activity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
         </activity>
-        <activity android:name=".activities.TutorialActivity" >
+        <activity
+            android:name=".activities.TutorialActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
         </activity>
-        <activity android:name=".activities.ChooseGame" >
+        <activity
+            android:name=".activities.ChooseGame"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
         </activity>
-        <activity android:name=".activities.GameActivity" >
+        <activity
+            android:name=".activities.GameActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
         </activity>
-        <activity android:name=".activities.TurnStat" >
+        <activity
+            android:name=".activities.TurnStat"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
         </activity>
-        <activity android:name=".activities.GameProc" >
+        <activity
+            android:name=".activities.GameProc"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
         </activity>
-        <activity android:name=".activities.WordStatistic" >
+        <activity
+            android:name=".activities.WordStatistic"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
         </activity>
-        <activity android:name=".activities.Edit_Teams" >
+        <activity
+            android:name=".activities.Edit_Teams"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
         </activity>
-        <activity android:name=".activities.AddElementsActivity" >
+        <activity
+            android:name=".activities.AddElementsActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".activities.DefinitionActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".activities.tutorial.RulesActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
+        </activity>
+        <activity android:name=".activities.tutorial.page1"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
+        </activity>
+        <activity android:name=".activities.tutorial.Tutorial1"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
+        </activity>
+        <activity android:name=".activities.tutorial.Tutroial2"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
+        </activity>
+        <activity android:name=".activities.tutorial.Tutroial3"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
+        </activity>
+        <activity android:name=".activities.tutorial.Tutroial4"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
+        </activity>
+        <activity android:name=".activities.tutorial.Tutroial5"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
+        </activity>
+        <activity android:name=".activities.tutorial.Tutroial6"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
         </activity>
     </application>
 

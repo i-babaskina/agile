@@ -16,6 +16,7 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+
         Button button = (Button) findViewById(R.id.button11);
         button.setOnClickListener(new View.OnClickListener() {
             @Override

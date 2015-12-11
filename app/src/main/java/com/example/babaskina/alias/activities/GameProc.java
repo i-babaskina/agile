@@ -1,15 +1,19 @@
 package com.example.babaskina.alias.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.Image;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -31,6 +35,12 @@ public class GameProc extends AppCompatActivity {
     int progress = 100;//GameActivity.turnLengthSeconds;
     int myProgress = 0;
     TextView gameWord;
+    public static int guessed = 0;
+    public static int unguessed = 0;
+    public static int unknown = 0;
+    public static int count = 0;
+    static String currentword = "";
+    public static String ukn[] = new String[200];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,11 +55,39 @@ public class GameProc extends AppCompatActivity {
         //public Turn turn = new Turn(playingTeam, parametres);
 
         TextView teamName = (TextView) findViewById(R.id.gameProcTeamName);
-        //gameWord = (TextView) findViewById(R.id.gameWordCurrent);
-
+        gameWord = (TextView) findViewById(R.id.gameWordCurrent);
         teamName.setText(teams.get(1));/*Exchange.game.getCurrentTeamName()*/
-        gameWord.setText(Exchange.game.getCurrentTurn().suggestNewWord().getInLowercase());
-    }
+        currentword = Exchange.game.getCurrentTurn().suggestNewWord().getInLowercase();
+        gameWord.setText(currentword);
+        final ImageButton guessedbtn = (ImageButton) findViewById(R.id.imageButton6);
+        guessedbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mHandler1.postDelayed(mUpdateUITimerTask, 0);
+                guessed++;
+                count++;
+            }
+        });
+        final ImageButton unguessedbtn = (ImageButton) findViewById(R.id.imageButton7);
+        unguessedbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mHandler1.postDelayed(mUpdateUITimerTask1, 0);
+                unguessed++;
+                count++;
+            }
+        });
+        final ImageButton unknownbtn = (ImageButton) findViewById(R.id.imageButton);
+        unknownbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mHandler1.postDelayed(mUpdateUITimerTask2, 0);
+                ukn[unknown] = currentword;
+                unknown++;
+                count++;
+        }});
+    };
+
 
     public void progress(){
         while(true){
@@ -102,6 +140,7 @@ public class GameProc extends AppCompatActivity {
                 // TODO Auto-generated method stub
                 myProgress++;
                 myProgressBar.setProgress(myProgress);
+                Progress.setText("" + (100 - myProgress) + "%");
             }
         };
     };
@@ -109,15 +148,21 @@ public class GameProc extends AppCompatActivity {
     private final Runnable mUpdateUITimerTask = new Runnable() {
         public void run() {
             // do whatever you want to change here, like:
-            Exchange.game.getCurrentTurn().getCurrentWord().markGuessed();
             gameWord.setText(Exchange.game.getCurrentTurn().suggestNewWord().getInLowercase());
         }
     };
     private final Runnable mUpdateUITimerTask1 = new Runnable() {
         public void run() {
             // do whatever you want to change here, like:
-            Exchange.game.getCurrentTurn().getCurrentWord().markUnguessed();
             gameWord.setText(Exchange.game.getCurrentTurn().suggestNewWord().getInLowercase());
+        }
+    };
+    private final Runnable mUpdateUITimerTask2 = new Runnable() {
+        public void run() {
+            // do whatever you want to change here, like:
+            currentword = Exchange.game.getCurrentTurn().suggestNewWord().getInLowercase();
+            gameWord.setText(currentword);
+
         }
     };
 
@@ -126,14 +171,33 @@ public class GameProc extends AppCompatActivity {
     private final Handler mHandler1 = new Handler();
 
 
-    public void onClickApprove(View view) {
-        mHandler1.postDelayed(mUpdateUITimerTask, 0);
+   /* public static void onClickApprove(View view) {
+        guessed++;
     }
 
-    public void onClickDecline(View view) {
-        mHandler11.postDelayed(mUpdateUITimerTask1, 0);
+    public static void onClickDecline(View view) {
+        unguessed++;
     }
-
+    public static void onClickUnknown(){
+        unknown++;
+    }*/
+   public static String[] getUkn(){
+       return ukn;
+   }
+    public static String getGuessed(){
+        return ""+guessed;
+    }
+    public static String getUnguessed(){
+        return ""+unguessed;
+    }
+    public static String getUnknown(){
+        return ""+unknown;
+    }
+    public static String getTotal(){
+        int total = guessed-unguessed;
+        total = (total < 0) ? 0 : total;
+        return ""+ total;
+    }
 
 }
 

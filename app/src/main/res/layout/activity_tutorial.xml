@@ -8,4 +8,34 @@
     android:background="@color/colorPrimary"
     tools:context="com.example.babaskina.alias.activities.TutorialActivity">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Rules"
+        android:id="@+id/rules"
+        android:textColor="#FFFFFF"
+        android:textIsSelectable="true"
+        android:textSize="40dp"
+        android:textStyle="bold|italic"
+        android:typeface="serif"
+        android:layout_alignWithParentIfMissing="false"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="184dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="How to play"
+        android:id="@+id/toplay"
+        android:textColor="#FFFFFF"
+        android:textIsSelectable="true"
+        android:textSize="40dp"
+        android:textStyle="bold|italic"
+        android:typeface="serif"
+        android:layout_alignWithParentIfMissing="false"
+        android:layout_below="@+id/rules"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
